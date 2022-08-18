@@ -18,12 +18,11 @@ const wss = new WebSocket.Server({ server })
 const sockets = []
 
 wss.on("connection", (socket) => {
-    socket.push(socket);
+    sockets.push(socket)
     console.log("Connected to Browser ✅")
     socket.on("close", () => console.log("Disconnected from Browser ❌"))
     socket.on("message", message => {
-        sockets.forEach(aSocket => aSocket.send(message.toString('utf8')))
+        sockets.forEach((aSocket) => aSocket.send(message.toString('utf-8')))
     })
-    socket.send("hello!!!")
 })
 server.listen(3000, handleListen)
